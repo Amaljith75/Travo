@@ -41,6 +41,7 @@ async function info(file, width) {
   return {
     file,
     thumb: ii.thumburl ?? ii.url,
+    original: ii.url,
     page: ii.descriptionurl,
     width: ii.width,
     height: ii.height,
@@ -102,7 +103,8 @@ if (!selection) {
   for (const [name, file] of Object.entries(selection)) {
     const meta = await info(file, 1600);
     if (!meta) throw new Error(`missing ${file}`);
-    await download(meta.thumb, path.join(OUT, `${name}.jpg`));
+    // Thumbnails can fail for some files; fall back to the original upload.
+    await download(meta.thumb, path.join(OUT, `${name}.jpg`)).catch(() => download(meta.original, path.join(OUT, `${name}.jpg`)));
     credits[name] = { file, page: meta.page, artist: meta.artist, license: meta.license, licenseUrl: meta.licenseUrl };
     console.log('saved', name);
   }
