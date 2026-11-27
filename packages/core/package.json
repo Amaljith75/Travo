@@ -1,0 +1,22 @@
+{
+  "name": "@travo/core",
+  "version": "0.1.0",
+  "private": true,
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "sideEffects": false,
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "test": "tsx --test src/**/*.test.ts",
+    "seed:sql": "tsx scripts/generate-seed-sql.ts"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.119.2",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "tsx": "^4.19.0",
+    "typescript": "~5.9.0"
+  }
+}
