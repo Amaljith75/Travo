@@ -108,4 +108,5 @@ if (!selection) {
   }
   await fs.writeFile(path.join(OUT, 'credits.json'), JSON.stringify(credits, null, 2));
   await fs.rm(path.join(OUT, 'candidates'), { recursive: true, force: true });
+  await fs.rm(path.join(OUT, 'candidates-extra'), { recursive: true, force: true });
 }

@@ -19,13 +19,6 @@ jobs:
         with:
           node-version: 22
       - run: node scripts/photos/fetch.mjs
-        if: hashFiles('scripts/photos/places-extra.json') == ''
-      - name: Extra candidates
-        if: hashFiles('scripts/photos/places-extra.json') != ''
-        run: node scripts/photos/fetch.mjs
-        env:
-          PLACES_FILE: scripts/photos/places-extra.json
-          CANDIDATE_DIR: candidates-extra
       - name: Commit photos
         run: |
           git config user.name "github-actions[bot]"
