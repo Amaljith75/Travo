@@ -62,7 +62,8 @@ async function download(url, dest) {
   throw new Error(`download failed ${url}`);
 }
 
-const places = JSON.parse(await fs.readFile(path.join(ROOT, 'scripts/photos/places.json'), 'utf8'));
+const placesFile = process.env.PLACES_FILE ?? 'scripts/photos/places.json';
+const places = JSON.parse(await fs.readFile(path.join(ROOT, placesFile), 'utf8'));
 let selection = null;
 try {
   selection = JSON.parse(await fs.readFile(path.join(ROOT, 'scripts/photos/selection.json'), 'utf8'));
@@ -71,7 +72,7 @@ try {
 await fs.mkdir(OUT, { recursive: true });
 
 if (!selection) {
-  const dir = path.join(OUT, 'candidates');
+  const dir = path.join(OUT, process.env.CANDIDATE_DIR ?? 'candidates');
   await fs.mkdir(dir, { recursive: true });
   const index = {};
   for (const [key, titles] of Object.entries(places)) {
