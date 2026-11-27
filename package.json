@@ -1,0 +1,23 @@
+{
+  "name": "travo",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Kerala travel marketplace — traveller mobile app, admin dashboard and shared core",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "mobile": "npm run start -w @travo/mobile",
+    "mobile:web": "npm run web -w @travo/mobile",
+    "admin": "npm run dev -w @travo/admin",
+    "admin:build": "npm run build -w @travo/admin",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "test": "npm run test -w @travo/core",
+    "db:seed:generate": "npm run seed:sql -w @travo/core"
+  },
+  "overrides": {
+    "react": "19.3.0",
+    "react-dom": "19.3.0"
+  }
+}
