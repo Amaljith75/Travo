@@ -1,0 +1,45 @@
+{
+  "expo": {
+    "name": "Travo",
+    "slug": "travo",
+    "scheme": "travo",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "backgroundColor": "#FAF7F1",
+    "primaryColor": "#17382A",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.travo.kerala"
+    },
+    "android": {
+      "package": "com.travo.kerala",
+      "versionCode": 1,
+      "adaptiveIcon": {
+        "backgroundColor": "#17382A",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      },
+      "predictiveBackGestureEnabled": false
+    },
+    "web": {
+      "favicon": "./assets/favicon.png",
+      "bundler": "metro",
+      "output": "single"
+    },
+    "plugins": [
+      "expo-router",
+      "expo-image",
+      "expo-font",
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/splash-icon.png",
+          "imageWidth": 160,
+          "backgroundColor": "#17382A"
+        }
+      ]
+    ]
+  }
+}

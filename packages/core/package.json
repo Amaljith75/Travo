@@ -7,7 +7,7 @@
   "sideEffects": false,
   "scripts": {
     "typecheck": "tsc --noEmit",
-    "test": "tsx --test src/**/*.test.ts",
+    "test": "tsx --test src/core.test.ts",
     "seed:sql": "tsx scripts/generate-seed-sql.ts"
   },
   "dependencies": {
@@ -17,6 +17,6 @@
   "devDependencies": {
     "@types/node": "^22.10.0",
     "tsx": "^4.19.0",
-    "typescript": "~5.9.0"
+    "typescript": "~6.0.3"
   }
 }

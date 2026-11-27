@@ -1,0 +1,101 @@
+name: Android APK
+
+# Builds the Travo traveller app as a release APK and publishes it to GitHub Releases.
+# Runs on pushes to main / claude/* branches, on version tags, or manually.
+on:
+  push:
+    branches: [main, 'claude/**']
+    tags: ['v*']
+    paths:
+      - 'apps/mobile/**'
+      - 'packages/core/**'
+      - 'package.json'
+      - 'package-lock.json'
+      - '.github/workflows/android-apk.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: android-apk-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      # Optional: set these as repository *variables* (not secrets — the anon key is public by design)
+      # to point the APK at your Supabase project. Without them the app runs in on-device demo mode.
+      EXPO_PUBLIC_SUPABASE_URL: ${{ vars.EXPO_PUBLIC_SUPABASE_URL }}
+      EXPO_PUBLIC_SUPABASE_ANON_KEY: ${{ vars.EXPO_PUBLIC_SUPABASE_ANON_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - uses: gradle/actions/setup-gradle@v4
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Typecheck and test shared core
+        run: |
+          npm run typecheck -w @travo/core
+          npm run test -w @travo/core
+
+      - name: Typecheck mobile app
+        run: npm run typecheck -w @travo/mobile
+
+      - name: Generate native Android project
+        working-directory: apps/mobile
+        run: npx expo prebuild --platform android --no-install --clean
+
+      - name: Build release APK
+        working-directory: apps/mobile/android
+        run: ./gradlew assembleRelease --no-daemon -PreactNativeArchitectures=arm64-v8a,armeabi-v7a
+
+      - name: Name artifact
+        id: meta
+        run: |
+          VERSION=$(node -p "require('./apps/mobile/app.json').expo.version")
+          if [[ "${GITHUB_REF}" == refs/tags/* ]]; then TAG="${GITHUB_REF_NAME}"; else TAG="v${VERSION}-build.${GITHUB_RUN_NUMBER}"; fi
+          APK="travo-${TAG}.apk"
+          cp apps/mobile/android/app/build/outputs/apk/release/app-release.apk "$APK"
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+          echo "apk=$APK" >> "$GITHUB_OUTPUT"
+          echo "sha=$(sha256sum "$APK" | cut -d' ' -f1)" >> "$GITHUB_OUTPUT"
+          ls -lh "$APK"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ steps.meta.outputs.tag }}
+          path: ${{ steps.meta.outputs.apk }}
+
+      - name: Publish GitHub release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.meta.outputs.tag }}
+          target_commitish: ${{ github.sha }}
+          name: Travo Android ${{ steps.meta.outputs.tag }}
+          prerelease: ${{ github.ref != 'refs/heads/main' && !startsWith(github.ref, 'refs/tags/') }}
+          files: ${{ steps.meta.outputs.apk }}
+          body: |
+            Travo traveller app — Android APK built from ${{ github.sha }} (${{ github.ref_name }}).
+
+            **Install:** download `${{ steps.meta.outputs.apk }}` on an Android phone (Android 7+) and open it. You may need to allow "Install unknown apps" for your browser.
+
+            **Data mode:** ${{ vars.EXPO_PUBLIC_SUPABASE_URL != '' && 'Connected to Supabase.' || 'Demo mode — sample Kerala data stored on the device; no real operators are contacted.' }}
+
+            This build is signed with a development key for testing/sideloading. Play Store releases need an upload keystore (see README).
+
+            SHA-256: `${{ steps.meta.outputs.sha }}`
