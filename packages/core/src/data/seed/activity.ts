@@ -1,4 +1,4 @@
-import type { Booking, BookingStatus, Enquiry, PaymentMethod, Review, ScheduledTrip, ScheduledTripStatus } from '../../types';
+import type { PaymentRecord, Booking, BookingStatus, Enquiry, PaymentMethod, Review, ScheduledTrip, ScheduledTripStatus } from '../../types';
 import { addDays, todayISO } from '../../utils/format';
 import { bookingId, childId, enquiryId, reviewId, tripId } from './ids';
 import { DEST } from './destinations';
@@ -178,3 +178,20 @@ export const seedReviews: Review[] = reviewSeeds.map((r, i) => ({
   createdAt: daysAgoISO(10 + i * 3),
   updatedAt: daysAgoISO(10 + i * 3),
 }));
+
+/** Offline payments recorded by admins against confirmed bookings. */
+export const seedPayments: PaymentRecord[] = seedBookings
+  .filter((b) => b.status === 'confirmed' || b.status === 'completed')
+  .map((b, i) => ({
+    id: `30000000-0000-4000-8000-${String(i + 1).padStart(12, '0')}`,
+    bookingId: b.id,
+    provider: 'offline',
+    method: b.preferredPaymentMethod === 'pay_at_operator' ? 'pay_at_operator' : b.preferredPaymentMethod,
+    amount: b.status === 'completed' ? b.estimatedTotal : Math.round(b.estimatedTotal * 0.3),
+    currency: 'INR' as const,
+    status: 'paid' as const,
+    providerReference: `ADV-${b.reference.slice(4)}`,
+    notes: b.status === 'completed' ? 'Paid in full' : '30% advance collected by operator',
+    createdAt: b.updatedAt,
+    updatedAt: b.updatedAt,
+  }));
