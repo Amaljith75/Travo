@@ -1,5 +1,9 @@
 import type {
   Booking,
+  BookingUpdate,
+  PaymentInput,
+  PaymentRecord,
+  SyncTable,
   BookingFilters,
   BookingReceipt,
   BookingStatus,
@@ -57,6 +61,12 @@ export interface DataAdapter {
   getBooking(id: string): Promise<Booking | null>;
   updateBookingStatus(id: string, status: BookingStatus): Promise<Booking>;
   addBookingNote(id: string, body: string, author: string): Promise<Booking>;
+  /** Edit traveller / trip details on a booking. */
+  updateBooking(id: string, patch: BookingUpdate): Promise<Booking>;
+  deleteBooking(id: string): Promise<void>;
+  listPayments(bookingId?: string): Promise<PaymentRecord[]>;
+  savePayment(input: PaymentInput, id?: string): Promise<PaymentRecord>;
+  deletePayment(id: string): Promise<void>;
   listEnquiries(): Promise<Enquiry[]>;
   updateEnquiryStatus(id: string, status: EnquiryStatus): Promise<Enquiry>;
 
@@ -71,6 +81,12 @@ export interface DataAdapter {
   saveDestination(input: DestinationInput, id?: string): Promise<Destination>;
   deleteDestination(id: string): Promise<void>;
   updateReviewStatus(id: string, status: ReviewStatus): Promise<Review>;
+
+  /**
+   * Live updates: calls `onChange` with the table name whenever data changes
+   * (from any client). Returns an unsubscribe function.
+   */
+  subscribe(onChange: (table: SyncTable) => void): () => void;
 
   /** Upload an image and return its public URL. */
   uploadImage(file: Blob, folder: string, filename: string): Promise<string>;

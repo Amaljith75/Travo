@@ -1,0 +1,520 @@
+{
+  "munnar-1": {
+    "file": "Munnar - Tea Plantations.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Munnar_-_Tea_Plantations.jpg",
+    "artist": "Ingo Mehling",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "munnar-2": {
+    "file": "Eravikulam National Park, Munnar - panoramio (9).jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Eravikulam_National_Park,_Munnar_-_panoramio_(9).jpg",
+    "artist": "Jaseem Hamza",
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0"
+  },
+  "munnar-3": {
+    "file": "Eravikulam 1.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Eravikulam_1.jpg",
+    "artist": "Arun Suresh",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0"
+  },
+  "munnar-4": {
+    "file": "Munnar_Overview.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Munnar_Overview.jpg",
+    "artist": "Kondephy",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "wayanad-1": {
+    "file": "Chembra lake.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Chembra_lake.jpg",
+    "artist": "Usandeep (talk) (Uploads)",
+    "license": "Public domain",
+    "licenseUrl": null
+  },
+  "wayanad-2": {
+    "file": "Blue,_Green_&_White.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Blue,_Green_%26_White.jpg",
+    "artist": "Karkiabhijeet",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "wayanad-3": {
+    "file": "Chembra.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Chembra.jpg",
+    "artist": "Aneesh Jose",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0"
+  },
+  "wayanad-4": {
+    "file": "Cave at Edakkal(Inside).JPG",
+    "page": "https://commons.wikimedia.org/wiki/File:Cave_at_Edakkal(Inside).JPG",
+    "artist": "Asif K Karim",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0"
+  },
+  "vagamon-1": {
+    "file": "Vagamon_meadows.JPG",
+    "page": "https://commons.wikimedia.org/wiki/File:Vagamon_meadows.JPG",
+    "artist": "Visakh wiki",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0"
+  },
+  "vagamon-2": {
+    "file": "Pain Forest, Vagamon - panoramio.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Pain_Forest,_Vagamon_-_panoramio.jpg",
+    "artist": "Jaseem Hamza",
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0"
+  },
+  "vagamon-3": {
+    "file": "VagamonPineForest.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:VagamonPineForest.jpg",
+    "artist": "SidhardhRamesh",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "alleppey-1": {
+    "file": "Alappuzha_Boat_Beauty_W.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Alappuzha_Boat_Beauty_W.jpg",
+    "artist": "Augustus Binu/ facebook",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0"
+  },
+  "alleppey-2": {
+    "file": "Kerala_Houseboat_(191490747).jpeg",
+    "page": "https://commons.wikimedia.org/wiki/File:Kerala_Houseboat_(191490747).jpeg",
+    "artist": "Kv Gopalakrishnan",
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0"
+  },
+  "alleppey-3": {
+    "file": "Alleppey Boat houses.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Alleppey_Boat_houses.jpg",
+    "artist": "Mohanrangaphotography",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "alleppey-4": {
+    "file": "Kerala Country Boat.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Kerala_Country_Boat.jpg",
+    "artist": "P.K.Niyogi",
+    "license": "Public domain",
+    "licenseUrl": null
+  },
+  "thekkady-1": {
+    "file": "Thekkady.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Thekkady.jpg",
+    "artist": "Jigyasu",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "thekkady-2": {
+    "file": "Bamboo Rafting during guided tour through Periyar Wild Life Sanctury.JPG",
+    "page": "https://commons.wikimedia.org/wiki/File:Bamboo_Rafting_during_guided_tour_through_Periyar_Wild_Life_Sanctury.JPG",
+    "artist": "Vi1618",
+    "license": "CC BY 2.5 in",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.5/in/deed.en"
+  },
+  "thekkady-3": {
+    "file": "Gaur (Indian Bison) at Periyar National Park & Wildlife Sanctuary.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Gaur_(Indian_Bison)_at_Periyar_National_Park_%26_Wildlife_Sanctuary.jpg",
+    "artist": "Anand2202",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "thekkady-4": {
+    "file": "Cardamom Hills.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Cardamom_Hills.jpg",
+    "artist": "Anand2202",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "varkala-1": {
+    "file": "Varkala_Beach,_Varkala,_Kerala.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Varkala_Beach,_Varkala,_Kerala.jpg",
+    "artist": "Devender Goyal",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "varkala-2": {
+    "file": "Varkala South Cliff - panoramio.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Varkala_South_Cliff_-_panoramio.jpg",
+    "artist": "Alexey Komarov",
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0"
+  },
+  "varkala-3": {
+    "file": "Varkala_beach_from_above.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Varkala_beach_from_above.jpg",
+    "artist": "Kondephy",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "kovalam-1": {
+    "file": "Kovalam_beach_trivandrum_kerala.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Kovalam_beach_trivandrum_kerala.jpg",
+    "artist": "Georgeumartin",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "kovalam-2": {
+    "file": "Kovalam Beach (TUI) - 2016.JPG",
+    "page": "https://commons.wikimedia.org/wiki/File:Kovalam_Beach_(TUI)_-_2016.JPG",
+    "artist": "The U Imager (TUI)",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "kovalam-3": {
+    "file": "FishingBoat-KovalamBeach-Kerala-India-May2002.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:FishingBoat-KovalamBeach-Kerala-India-May2002.jpg",
+    "artist": "JMBryant at English Wikipedia",
+    "license": "Public domain",
+    "licenseUrl": null
+  },
+  "fort-kochi-1": {
+    "file": "Chinese_Fishing_Net_Raising_Birds_Sunrise_Ashtamudi_Kollam_Mar22_A7C_01784.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Chinese_Fishing_Net_Raising_Birds_Sunrise_Ashtamudi_Kollam_Mar22_A7C_01784.jpg",
+    "artist": "This Photo was taken by Timothy A. Gonsalves.  Feel free to use my photos, but please mention me as the author.  I would much appreciate if you send me an email tagooty@yahoo.com or write on my talk page, for my information.  Please contact me before commercial use.\n\n\n\nPlease do not upload an edited image here without consulting me.  I would like to make corrections only at my own source to ensure that the changes improve the image and are preserved.Otherwise you may upload an edited image with a new name. Please use one of the templates derivative or extract.",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "fort-kochi-2": {
+    "file": "Chinese Fishing Net (Kochi, India).jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Chinese_Fishing_Net_(Kochi,_India).jpg",
+    "artist": "The original uploader was Gaius Cornelius at English Wikipedia.",
+    "license": "Public domain",
+    "licenseUrl": null
+  },
+  "fort-kochi-3": {
+    "file": "Kochi,_Fishing_nets_at_sunset,_Kerala,_India.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Kochi,_Fishing_nets_at_sunset,_Kerala,_India.jpg",
+    "artist": "Vyacheslav Argenberg",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0"
+  },
+  "athirappilly-1": {
+    "file": "Athirapally Waterfalls, Chalakudy - The Mighty Falls.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Athirapally_Waterfalls,_Chalakudy_-_The_Mighty_Falls.jpg",
+    "artist": "Jan J George",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "athirappilly-2": {
+    "file": "Athirappilly Waterfalls after the Monsoons.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Athirappilly_Waterfalls_after_the_Monsoons.jpg",
+    "artist": "Jan Joseph George",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "athirappilly-3": {
+    "file": "The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:The_View_of_the_Athirapally_Falls_during_the_onset_of_Monsoon.jpg",
+    "artist": "Jan Joseph George",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "athirappilly-4": {
+    "file": "The_full_flowing_Vazhachal_Falls_on_the_upper_reaches_of_Chalakudy_River.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:The_full_flowing_Vazhachal_Falls_on_the_upper_reaches_of_Chalakudy_River.jpg",
+    "artist": "Jan Joseph George",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "bekal-1": {
+    "file": "Bakel fort from beach.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Bakel_fort_from_beach.jpg",
+    "artist": "Vinayaraj",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0"
+  },
+  "bekal-2": {
+    "file": "Bakel_Fort_Beach_Kasaragod7.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Bakel_Fort_Beach_Kasaragod7.jpg",
+    "artist": "Vinayaraj",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0"
+  },
+  "bekal-3": {
+    "file": "Bekal Fort watch tower view.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Bekal_Fort_watch_tower_view.jpg",
+    "artist": "Ajaiprabha",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "ponmudi-1": {
+    "file": "PONMUDI.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:PONMUDI.jpg",
+    "artist": "Sambath Raj 009",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "ponmudi-2": {
+    "file": "Morning at Ponmudi.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Morning_at_Ponmudi.jpg",
+    "artist": "Arunelectra",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0"
+  },
+  "ponmudi-3": {
+    "file": "Kallar and meenmutty falls.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Kallar_and_meenmutty_falls.jpg",
+    "artist": "Pillai.mech",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0"
+  },
+  "kumarakom-1": {
+    "file": "Kumarkom.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Kumarkom.jpg",
+    "artist": "Jigyasu",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "kumarakom-2": {
+    "file": "Kerala Kumarakom Bird Sanctuary2.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Kerala_Kumarakom_Bird_Sanctuary2.jpg",
+    "artist": "P.K.Niyogi (talk)",
+    "license": "Public domain",
+    "licenseUrl": null
+  },
+  "kumarakom-3": {
+    "file": "Kerala_Kumarakom_Bird_Sanctuary.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Kerala_Kumarakom_Bird_Sanctuary.jpg",
+    "artist": "P.K.Niyogi (talk)",
+    "license": "Public domain",
+    "licenseUrl": null
+  },
+  "idukki-1": {
+    "file": "AnaimudiPeak DSC 4834.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:AnaimudiPeak_DSC_4834.jpg",
+    "artist": "Mdmadhu",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "idukki-2": {
+    "file": "Sunrise_at_Munnar,Kerala.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Sunrise_at_Munnar,Kerala.jpg",
+    "artist": "Rinoj Hashim",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "kozhikode-1": {
+    "file": "Kozhikkod beach.JPG",
+    "page": "https://commons.wikimedia.org/wiki/File:Kozhikkod_beach.JPG",
+    "artist": "Sajith Erattupetta",
+    "license": "CC0",
+    "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en"
+  },
+  "kozhikode-2": {
+    "file": "Kozhikode Beach 01315.JPG",
+    "page": "https://commons.wikimedia.org/wiki/File:Kozhikode_Beach_01315.JPG",
+    "artist": "Vengolis",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "kozhikode-3": {
+    "file": "Kozhikode Beach 01603.JPG",
+    "page": "https://commons.wikimedia.org/wiki/File:Kozhikode_Beach_01603.JPG",
+    "artist": "Vengolis",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "sabarimala-1": {
+    "file": "MOUNTAINS_SABARIMALA_KERALA_-_panoramio.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:MOUNTAINS_SABARIMALA_KERALA_-_panoramio.jpg",
+    "artist": "rajaraman sundaram",
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0"
+  },
+  "sabarimala-2": {
+    "file": "DISTANT MOUNTAINS^SABARIMALA - panoramio.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:DISTANT_MOUNTAINS%5ESABARIMALA_-_panoramio.jpg",
+    "artist": "rajaraman sundaram",
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0"
+  },
+  "sabarimala-3": {
+    "file": "Blue mountains sabarimala kerala - panoramio.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Blue_mountains_sabarimala_kerala_-_panoramio.jpg",
+    "artist": "rajaraman sundaram",
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0"
+  },
+  "munroe-island-1": {
+    "file": "Beautiful_Munroe_Island_,_kollam_district_,_kerala.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Beautiful_Munroe_Island_,_kollam_district_,_kerala.jpg",
+    "artist": "Kkkriku",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "munroe-island-2": {
+    "file": "Boat Service Mundro.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Boat_Service_Mundro.jpg",
+    "artist": "Ronyrajan95",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "munroe-island-3": {
+    "file": "BoatService.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:BoatService.jpg",
+    "artist": "Ronyrajan95",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "nelliyampathy-1": {
+    "file": "The_Western_Ghats003.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:The_Western_Ghats003.jpg",
+    "artist": "Shagil Kannur",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "nelliyampathy-2": {
+    "file": "Nelliampathi Sitharkundu viewpoint.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Nelliampathi_Sitharkundu_viewpoint.jpg",
+    "artist": "Sanu N",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "nelliyampathy-3": {
+    "file": "A mountain stream.JPG",
+    "page": "https://commons.wikimedia.org/wiki/File:A_mountain_stream.JPG",
+    "artist": "Dil Shad Roshan",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "nilambur-1": {
+    "file": "Chaliyar River at Nilambur.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Chaliyar_River_at_Nilambur.jpg",
+    "artist": "Shyamal",
+    "license": "CC0",
+    "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en"
+  },
+  "nilambur-2": {
+    "file": "DR0050DSC 7079.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:DR0050DSC_7079.jpg",
+    "artist": "Dil Shad Roshan",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "nilambur-3": {
+    "file": "Coconut Tree - Flickr - sajinrajknilambur.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Coconut_Tree_-_Flickr_-_sajinrajknilambur.jpg",
+    "artist": "Sajin Raj K from Nilambur, India",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0"
+  },
+  "kannur-1": {
+    "file": "Muzhappilangad_Drive-in_Beach_2.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Muzhappilangad_Drive-in_Beach_2.jpg",
+    "artist": "Shagil Kannur",
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0"
+  },
+  "kannur-2": {
+    "file": "Fishermen at work by Shagil Kannur.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Fishermen_at_work_by_Shagil_Kannur.jpg",
+    "artist": "Shagil Kannur",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "kannur-3": {
+    "file": "Kannurfort3.JPG",
+    "page": "https://commons.wikimedia.org/wiki/File:Kannurfort3.JPG",
+    "artist": "MANOJTV at en.wikipedia",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/"
+  },
+  "kannur-4": {
+    "file": "Dharmadam Thuruth (Island).jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Dharmadam_Thuruth_(Island).jpg",
+    "artist": "Shagil Kannur",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0"
+  },
+  "hero-1": {
+    "file": "A Houseboat in Backwaters of Kerala.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:A_Houseboat_in_Backwaters_of_Kerala.jpg",
+    "artist": "RndmCrs",
+    "license": "CC0",
+    "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en"
+  },
+  "hero-2": {
+    "file": "A view of Kuttanad..കുട്ടനാട്, ഒരു ദൃശ്യം.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:A_view_of_Kuttanad..%E0%B4%95%E0%B5%81%E0%B4%9F%E0%B5%8D%E0%B4%9F%E0%B4%A8%E0%B4%BE%E0%B4%9F%E0%B5%8D,_%E0%B4%92%E0%B4%B0%E0%B5%81_%E0%B4%A6%E0%B5%83%E0%B4%B6%E0%B5%8D%E0%B4%AF%E0%B4%82.jpg",
+    "artist": "Reji Jacob",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0"
+  },
+  "v-swift-1": {
+    "file": "Suzuki_Swift_(2024)_hybrid_DSC_6076.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Suzuki_Swift_(2024)_hybrid_DSC_6076.jpg",
+    "artist": "Alexander-93",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "v-etios-1": {
+    "file": "2013_Toyota_Etios_Valco_E_(Indonesia)_front_view.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:2013_Toyota_Etios_Valco_E_(Indonesia)_front_view.jpg",
+    "artist": "Andra Febrian",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "v-innova-1": {
+    "file": "Toyota_Innova_Zenix_2.0_V_(III)_–_f_22032025.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Toyota_Innova_Zenix_2.0_V_(III)_%E2%80%93_f_22032025.jpg",
+    "artist": "© M 93",
+    "license": "CC BY-SA 3.0 de",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/de/deed.en"
+  },
+  "v-thar-1": {
+    "file": "Mahindra_Thar_SUV_in_\"Red_Rage\"_color_at_Ashiana_Brahmanda,_East_Singbhum_India_(Ank_Kumar,_Infosys_limited)_02_(cropped).jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Mahindra_Thar_SUV_in_%22Red_Rage%22_color_at_Ashiana_Brahmanda,_East_Singbhum_India_(Ank_Kumar,_Infosys_limited)_02_(cropped).jpg",
+    "artist": "Ank Kumar",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "v-traveller-1": {
+    "file": "Force Traveller, Leh-Manali Highway.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Force_Traveller,_Leh-Manali_Highway.jpg",
+    "artist": "Yann Forget",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0"
+  },
+  "v-minibus-1": {
+    "file": "Best cbd wad.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Best_cbd_wad.jpg",
+    "artist": "The original uploader was Metasur at English Wikipedia.",
+    "license": "CC BY-SA 2.5",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.5"
+  },
+  "v-bus-1": {
+    "file": "MTC_Bus_21G.JPG",
+    "page": "https://commons.wikimedia.org/wiki/File:MTC_Bus_21G.JPG",
+    "artist": "VtTN",
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0"
+  },
+  "v-eclass-1": {
+    "file": "Mercedes-Benz_W214_1X7A1841.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Mercedes-Benz_W214_1X7A1841.jpg",
+    "artist": "Alexander-93",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "v-xuv-1": {
+    "file": "Mahindra XUV 500 W8 2018.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Mahindra_XUV_500_W8_2018.jpg",
+    "artist": "RL GNZLZ from Chile",
+    "license": "CC BY-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0"
+  },
+  "v-coach-1": {
+    "file": "CUL Transport Volvo B11R.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:CUL_Transport_Volvo_B11R.jpg",
+    "artist": "Supersabre 18",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  }
+}

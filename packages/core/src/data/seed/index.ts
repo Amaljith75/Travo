@@ -2,8 +2,8 @@ import { seedDestinations } from './destinations';
 import { seedOperators } from './operators';
 import { seedPackages } from './packages';
 import { seedVehicles } from './vehicles';
-import { seedBookings, seedEnquiries, seedReviews, seedTrips } from './activity';
-import type { Booking, Destination, Enquiry, Operator, Review, ScheduledTrip, TravelPackage, Vehicle } from '../../types';
+import { seedBookings, seedEnquiries, seedPayments, seedReviews, seedTrips } from './activity';
+import type { PaymentRecord, Booking, Destination, Enquiry, Operator, Review, ScheduledTrip, TravelPackage, Vehicle } from '../../types';
 
 export interface DataSnapshot {
   destinations: Destination[];
@@ -14,6 +14,7 @@ export interface DataSnapshot {
   bookings: Booking[];
   enquiries: Enquiry[];
   reviews: Review[];
+  payments: PaymentRecord[];
 }
 
 /** Fresh deep copy of the demo dataset. */
@@ -28,6 +29,7 @@ export function createSeedSnapshot(): DataSnapshot {
       bookings: seedBookings,
       enquiries: seedEnquiries,
       reviews: seedReviews,
+      payments: seedPayments,
     }),
   ) as DataSnapshot;
 }

@@ -1,8 +1,12 @@
-import type { SupabaseClient } from '@supabase/supabase-js';
+import type { RealtimeChannel, SupabaseClient } from '@supabase/supabase-js';
 import type { DataAdapter } from './adapter';
 import { DataError } from './adapter';
 import type {
   Booking,
+  BookingUpdate,
+  PaymentInput,
+  PaymentRecord,
+  SyncTable,
   BookingFilters,
   BookingReceipt,
   BookingStatus,
@@ -29,6 +33,7 @@ import type {
 import { filterBookings, filterPackages, filterTrips, filterVehicles } from './filters';
 import { computeDashboardStats } from './stats';
 import { uuid } from '../utils/format';
+import { SYNC_TABLES } from '../types';
 
 type Row = Record<string, unknown>;
 
@@ -242,7 +247,7 @@ export class SupabaseAdapter implements DataAdapter {
       this.listBookings(),
       this.listEnquiries(),
     ]);
-    return computeDashboardStats({ destinations, operators, packages, trips, vehicles, bookings, enquiries, reviews: [] });
+    return computeDashboardStats({ destinations, operators, packages, trips, vehicles, bookings, enquiries, reviews: [], payments: [] });
   }
 
   async listBookings(filters: BookingFilters = {}) {
@@ -270,6 +275,68 @@ export class SupabaseAdapter implements DataAdapter {
     const { error } = await this.client.from('bookings').update({ internal_notes: notes }).eq('id', id);
     if (error) this.fail(error, 'Saving note failed');
     return { ...current, internalNotes: notes };
+  }
+
+  async updateBooking(id: string, patch: BookingUpdate) {
+    const { passengers, ...rest } = patch;
+    if (Object.keys(rest).length) {
+      const { error } = await this.client.from('bookings').update(snakify(rest as Row)).eq('id', id);
+      if (error) this.fail(error, 'Updating booking failed');
+    }
+    if (passengers) {
+      await this.replaceChildren(
+        'booking_passengers',
+        'booking_id',
+        id,
+        passengers.map((p) => ({ booking_id: id, full_name: p.fullName, age: p.age, passenger_type: p.type })),
+      );
+    }
+    const b = await this.getBooking(id);
+    if (!b) throw new DataError('Booking not found', 'not_found');
+    return b;
+  }
+
+  deleteBooking(id: string) {
+    return this.deleteRow('bookings', id);
+  }
+
+  async listPayments(bookingId?: string) {
+    let q = this.client.from('payment_records').select('*').order('created_at', { ascending: false });
+    if (bookingId) q = q.eq('booking_id', bookingId);
+    const { data, error } = await q;
+    if (error) this.fail(error, 'Loading payments failed');
+    return (data ?? []).map((r) => {
+      const p = camelize<PaymentRecord>(r);
+      return { ...p, amount: num(p.amount) };
+    });
+  }
+
+  async savePayment(input: PaymentInput, id?: string) {
+    const row = await this.upsertRow('payment_records', snakify({ ...input, currency: 'INR' } as Row), id);
+    const p = camelize<PaymentRecord>(row);
+    return { ...p, amount: num(p.amount) };
+  }
+
+  deletePayment(id: string) {
+    return this.deleteRow('payment_records', id);
+  }
+
+  /**
+   * Live updates via the `sync_state` table: a trigger bumps a per-table
+   * version on every write, so even changes the viewer can no longer read
+   * (unpublished, deleted, private bookings) still trigger a refresh.
+   */
+  subscribe(onChange: (table: SyncTable) => void): () => void {
+    const channel: RealtimeChannel = this.client
+      .channel(`travo-sync-${Math.random().toString(36).slice(2)}`)
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'sync_state' }, (payload) => {
+        const t = ((payload.new as Row | null)?.table_name ?? (payload.old as Row | null)?.table_name) as SyncTable | undefined;
+        if (t && (SYNC_TABLES as readonly string[]).includes(t)) onChange(t);
+      })
+      .subscribe();
+    return () => {
+      void this.client.removeChannel(channel);
+    };
   }
 
   async listEnquiries() {

@@ -1,8 +1,8 @@
 import type { Destination } from '../../types';
-import { photo } from '../../utils/media';
+import { placePhotos, type PlaceKey } from '../../utils/media';
 import { DEMO_TIMESTAMP, destId } from './ids';
 
-type Seed = Omit<Destination, 'id' | 'createdAt' | 'updatedAt' | 'isActive' | 'gallery'> & { gallery?: string[] };
+type Seed = Omit<Destination, 'id' | 'createdAt' | 'updatedAt' | 'isActive' | 'gallery' | 'coverImage'>;
 
 const seeds: Seed[] = [
   {
@@ -12,8 +12,6 @@ const seeds: Seed[] = [
     tagline: 'Rolling tea estates in the Western Ghats',
     description:
       'At 1,600 m, Munnar is a cool hill station wrapped in emerald tea gardens, misty valleys and spice-scented air. Home to the endangered Nilgiri tahr at Eravikulam and South India’s highest peak, Anamudi.',
-    coverImage: photo('teaHills'),
-    gallery: [photo('teaRows'), photo('mistyHills'), photo('waterfall')],
     attractions: [
       { name: 'Eravikulam National Park', description: 'Grasslands that shelter the Nilgiri tahr; Neelakurinji blooms every 12 years.' },
       { name: 'Mattupetty Dam', description: 'Boating on a calm reservoir surrounded by shola forest.' },
@@ -33,8 +31,6 @@ const seeds: Seed[] = [
     tagline: 'Forests, caves and misty peaks',
     description:
       'A green plateau of coffee and pepper plantations, ancient Edakkal cave petroglyphs, wildlife sanctuaries and the heart-shaped lake on Chembra Peak.',
-    coverImage: photo('forest'),
-    gallery: [photo('mistyHills'), photo('wildlife'), photo('waterfall')],
     attractions: [
       { name: 'Edakkal Caves', description: 'Neolithic rock engravings reached by a short, steep climb.' },
       { name: 'Chembra Peak', description: 'Trek to the famous heart-shaped lake.' },
@@ -54,8 +50,6 @@ const seeds: Seed[] = [
     tagline: 'Meadows, pine forests and paragliding',
     description:
       'Quiet, rolling meadows and pine forests on the Idukki–Kottayam border. A favourite for group getaways, campfires and paragliding at the Vagamon festival.',
-    coverImage: photo('meadow'),
-    gallery: [photo('mistyHills'), photo('teaRows')],
     attractions: [
       { name: 'Vagamon Meadows', description: 'Endless green slopes perfect for picnics.' },
       { name: 'Pine Forest', description: 'Cool, cinematic walks among tall pines.' },
@@ -74,8 +68,6 @@ const seeds: Seed[] = [
     tagline: 'Houseboats on the backwaters',
     description:
       'The “Venice of the East” — a web of lagoons, canals and paddy fields best explored on a traditional kettuvallam houseboat with Kerala meals cooked on board.',
-    coverImage: photo('houseboat'),
-    gallery: [photo('backwaters'), photo('canoe'), photo('palmBeach')],
     attractions: [
       { name: 'Vembanad Lake', description: 'Kerala’s longest lake and the heart of houseboat cruising.' },
       { name: 'Alappuzha Beach', description: 'A 150-year-old pier and lighthouse by the sea.' },
@@ -94,8 +86,6 @@ const seeds: Seed[] = [
     tagline: 'Spice country and Periyar wildlife',
     description:
       'Gateway to Periyar Tiger Reserve, with boat safaris on Periyar Lake, bamboo rafting, spice plantations and Kathakali performances in the evenings.',
-    coverImage: photo('wildlife'),
-    gallery: [photo('spices'), photo('forest')],
     attractions: [
       { name: 'Periyar Tiger Reserve', description: 'Lake cruise to spot elephants, gaur and birds.' },
       { name: 'Spice plantations', description: 'Cardamom, pepper and clove gardens.' },
@@ -114,8 +104,6 @@ const seeds: Seed[] = [
     tagline: 'Red cliffs over the Arabian Sea',
     description:
       'Laterite cliffs, a bohemian café strip and a sacred beach at Papanasam. Varkala is for slow sunsets, yoga mornings and fresh seafood.',
-    coverImage: photo('beachCliff'),
-    gallery: [photo('palmBeach'), photo('lighthouse')],
     attractions: [
       { name: 'North Cliff', description: 'Cafés and sunset views on the cliff edge.' },
       { name: 'Janardanaswamy Temple', description: '2,000-year-old temple near the beach.' },
@@ -134,8 +122,6 @@ const seeds: Seed[] = [
     tagline: 'Crescent beaches and a striped lighthouse',
     description:
       'Three crescent beaches south of Thiruvananthapuram, famous for the Vizhinjam lighthouse, Ayurvedic resorts and calm swimming waters.',
-    coverImage: photo('lighthouse'),
-    gallery: [photo('palmBeach'), photo('beachCliff')],
     attractions: [
       { name: 'Lighthouse Beach', description: 'Climb the lighthouse for coastal views.' },
       { name: 'Hawa Beach', description: 'Morning fishing boats and calm waters.' },
@@ -154,8 +140,6 @@ const seeds: Seed[] = [
     tagline: 'Colonial lanes and Chinese fishing nets',
     description:
       'A layered port town of Portuguese, Dutch and British history — Chinese fishing nets, Jew Town spice markets, art cafés and the Kochi-Muziris Biennale.',
-    coverImage: photo('fortKochi'),
-    gallery: [photo('spices'), photo('backwaters')],
     attractions: [
       { name: 'Chinese fishing nets', description: 'Cantilevered nets silhouetted at sunset.' },
       { name: 'Mattancherry Palace', description: 'Murals depicting the Ramayana.' },
@@ -174,8 +158,6 @@ const seeds: Seed[] = [
     tagline: 'Kerala’s mightiest waterfall',
     description:
       'An 80-ft cascade on the Chalakudy river framed by rainforest. Combine with Vazhachal falls and the Sholayar forest drive for a classic day trip from Kochi or Thrissur.',
-    coverImage: photo('waterfall'),
-    gallery: [photo('forest'), photo('mistyHills')],
     attractions: [
       { name: 'Athirappilly Falls', description: 'Walk down to the base for the full roar.' },
       { name: 'Vazhachal Falls', description: 'Gentler falls 5 km upstream.' },
@@ -194,8 +176,6 @@ const seeds: Seed[] = [
     tagline: 'A seaside fort in the far north',
     description:
       'Kerala’s largest fort sits on a headland above the sea. Nearby are quiet beaches, Valiyaparamba backwaters and Theyyam rituals in winter.',
-    coverImage: photo('beachCliff'),
-    gallery: [photo('palmBeach'), photo('backwaters')],
     attractions: [
       { name: 'Bekal Fort', description: '17th-century keyhole-shaped fort with sea views.' },
       { name: 'Valiyaparamba', description: 'Island-studded backwaters, uncrowded.' },
@@ -214,8 +194,6 @@ const seeds: Seed[] = [
     tagline: 'A hairpin climb above the capital',
     description:
       'A compact hill station 60 km from Thiruvananthapuram with 22 hairpin bends, tea gardens and cool clouds — perfect for a one-day escape.',
-    coverImage: photo('mistyHills'),
-    gallery: [photo('teaRows'), photo('waterfall')],
     attractions: [
       { name: 'Golden Valley', description: 'Riverside stop at the foot of the hills.' },
       { name: 'Meenmutty Falls', description: 'Short forest trek to the falls.' },
@@ -234,8 +212,6 @@ const seeds: Seed[] = [
     tagline: 'Lakeside calm and a bird sanctuary',
     description:
       'On the eastern shore of Vembanad Lake, Kumarakom is known for luxury lake resorts, a migratory bird sanctuary and village life tours.',
-    coverImage: photo('backwaters'),
-    gallery: [photo('canoe'), photo('houseboat')],
     attractions: [
       { name: 'Kumarakom Bird Sanctuary', description: 'Herons, egrets and Siberian cranes in season.' },
       { name: 'Pathiramanal Island', description: 'Boat out to a quiet island on the lake.' },
@@ -254,8 +230,6 @@ const seeds: Seed[] = [
     tagline: 'Arch dams and high-range forests',
     description:
       'The Idukki arch dam spans two granite hills above a vast reservoir. The district is a base for Kalvari Mount, Anchuruli tunnel and wildlife.',
-    coverImage: photo('mistyHills'),
-    gallery: [photo('forest'), photo('teaHills')],
     attractions: [
       { name: 'Idukki Arch Dam', description: 'One of Asia’s highest arch dams; opens on festival days.' },
       { name: 'Kalvari Mount', description: 'Panoramic reservoir viewpoint.' },
@@ -274,8 +248,6 @@ const seeds: Seed[] = [
     tagline: 'Spice coast, biryani and beaches',
     description:
       'The historic port where Vasco da Gama landed. Kozhikode is famous for halwa street, Malabar biryani, Kappad beach and day trips to Thusharagiri falls.',
-    coverImage: photo('palmBeach'),
-    gallery: [photo('spices'), photo('waterfall')],
     attractions: [
       { name: 'Kozhikode Beach', description: 'Evening promenade and street food.' },
       { name: 'SM Street', description: 'Sweetmeat Street for halwa and shopping.' },
@@ -294,8 +266,6 @@ const seeds: Seed[] = [
     tagline: 'The Ayyappa pilgrimage',
     description:
       'The hill shrine of Lord Ayyappa in the Periyar Tiger Reserve draws millions of devotees during the Mandala–Makaravilakku season, via the Pamba base camp.',
-    coverImage: photo('temple'),
-    gallery: [photo('forest')],
     attractions: [
       { name: 'Sannidhanam', description: 'The main shrine, reached by a 5 km forest climb from Pamba.' },
       { name: 'Pamba', description: 'Base camp and sacred river.' },
@@ -314,8 +284,6 @@ const seeds: Seed[] = [
     tagline: 'Canoe through village canals',
     description:
       'A cluster of islets where the Kallada river meets Ashtamudi Lake. Glide through narrow canals by country boat at sunrise past coir makers and prawn farms.',
-    coverImage: photo('canoe'),
-    gallery: [photo('backwaters')],
     attractions: [
       { name: 'Sunrise canoe', description: 'Two-hour canal tour at dawn.' },
       { name: 'Ashtamudi Lake', description: 'Eight-armed lake, gateway to Kollam.' },
@@ -333,8 +301,6 @@ const seeds: Seed[] = [
     tagline: 'Orange orchards in the clouds',
     description:
       'Above Palakkad’s paddy plains, Nelliyampathy offers orange and coffee estates, Seetharkundu viewpoint and the Pothundi dam on the climb.',
-    coverImage: photo('teaRows'),
-    gallery: [photo('mistyHills')],
     attractions: [
       { name: 'Seetharkundu viewpoint', description: 'Sheer drop over the plains.' },
       { name: 'Pothundi Dam', description: 'Earth dam at the foot of the ghat road.' },
@@ -352,8 +318,6 @@ const seeds: Seed[] = [
     tagline: 'Teak forests and a hanging bridge',
     description:
       'Home to the world’s oldest teak plantation, Conolly’s Plot, a riverside hanging bridge and the Teak Museum. A peaceful forest escape in Malappuram.',
-    coverImage: photo('forest'),
-    gallery: [photo('waterfall')],
     attractions: [
       { name: 'Conolly’s Plot', description: 'Teak planted in the 1840s.' },
       { name: 'Teak Museum', description: 'The only museum of its kind.' },
@@ -371,8 +335,6 @@ const seeds: Seed[] = [
     tagline: 'Theyyam and drive-in beaches',
     description:
       'Land of looms and lores: Muzhappilangad drive-in beach, St. Angelo Fort, handloom villages and spectacular Theyyam rituals between December and April.',
-    coverImage: photo('palmBeach'),
-    gallery: [photo('beachCliff')],
     attractions: [
       { name: 'Muzhappilangad Beach', description: 'Kerala’s longest drive-in beach.' },
       { name: 'St. Angelo Fort', description: 'Portuguese fort facing the sea.' },
@@ -386,13 +348,17 @@ const seeds: Seed[] = [
   },
 ];
 
-export const seedDestinations: Destination[] = seeds.map((s, i) => ({
+export const seedDestinations: Destination[] = seeds.map((s, i) => {
+  const [cover, ...gallery] = placePhotos(s.slug as PlaceKey);
+  return {
   ...s,
-  gallery: s.gallery ?? [],
+  coverImage: cover!,
+  gallery,
   id: destId(i + 1),
   isActive: true,
   createdAt: DEMO_TIMESTAMP,
   updatedAt: DEMO_TIMESTAMP,
-}));
+  };
+});
 
 export const DEST = Object.fromEntries(seedDestinations.map((d) => [d.slug, d.id])) as Record<string, string>;

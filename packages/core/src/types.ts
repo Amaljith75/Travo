@@ -350,6 +350,7 @@ export interface PaymentRecord extends Timestamps {
   currency: 'INR';
   status: PaymentStatus;
   providerReference: string | null;
+  notes?: string | null;
 }
 
 export interface AppNotification extends Timestamps {
@@ -481,6 +482,30 @@ export interface BookingReceipt {
   estimatedTotal: number;
   createdAt: ISODateTime;
 }
+
+export type BookingUpdate = Partial<
+  Pick<
+    Booking,
+    | 'travelDate'
+    | 'adults'
+    | 'children'
+    | 'pickupLocation'
+    | 'contactName'
+    | 'contactPhone'
+    | 'contactEmail'
+    | 'specialRequirements'
+    | 'preferredPaymentMethod'
+    | 'estimatedTotal'
+    | 'passengers'
+    | 'operatorId'
+  >
+>;
+
+export type PaymentInput = Omit<PaymentRecord, 'id' | 'createdAt' | 'updatedAt' | 'currency'> & { notes?: string | null };
+
+/** Tables whose changes are broadcast to clients for live refresh. */
+export const SYNC_TABLES = ['destinations', 'operators', 'packages', 'scheduled_trips', 'vehicles', 'bookings', 'enquiries', 'reviews', 'payment_records'] as const;
+export type SyncTable = (typeof SYNC_TABLES)[number];
 
 export type PackageInput = Omit<TravelPackage, 'id' | 'createdAt' | 'updatedAt' | 'rating' | 'reviewCount' | 'bookingCount'>;
 export type ScheduledTripInput = Omit<ScheduledTrip, 'id' | 'createdAt' | 'updatedAt'>;

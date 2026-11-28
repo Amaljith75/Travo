@@ -2,6 +2,10 @@ import type { DataAdapter } from './adapter';
 import { DataError } from './adapter';
 import type {
   Booking,
+  BookingUpdate,
+  PaymentInput,
+  PaymentRecord,
+  SyncTable,
   BookingFilters,
   BookingReceipt,
   BookingStatus,
@@ -85,7 +89,11 @@ export class DemoAdapter implements DataAdapter {
     this.loading ??= (async () => {
       try {
         const raw = await this.store.getItem(STORAGE_KEY);
-        if (raw) return (this.snapshot = JSON.parse(raw) as DataSnapshot);
+        if (raw) {
+          const parsed = JSON.parse(raw) as DataSnapshot;
+          parsed.payments ??= [];
+          return (this.snapshot = parsed);
+        }
       } catch {
         // Corrupt or unavailable storage: fall back to fresh seed.
       }
@@ -94,8 +102,16 @@ export class DemoAdapter implements DataAdapter {
     return this.loading;
   }
 
-  private async commit(): Promise<void> {
+  private listeners = new Set<(t: SyncTable) => void>();
+
+  subscribe(onChange: (table: SyncTable) => void): () => void {
+    this.listeners.add(onChange);
+    return () => this.listeners.delete(onChange);
+  }
+
+  private async commit(table?: SyncTable): Promise<void> {
     if (!this.snapshot) return;
+    if (table) queueMicrotask(() => this.listeners.forEach((l) => l(table)));
     try {
       await this.store.setItem(STORAGE_KEY, JSON.stringify(this.snapshot));
     } catch (e) {
@@ -239,7 +255,7 @@ export class DemoAdapter implements DataAdapter {
       updatedAt: now,
     };
     s.bookings.push(booking);
-    await this.commit();
+    await this.commit('bookings');
     return { reference, status: booking.status, estimatedTotal: booking.estimatedTotal, createdAt: now };
   }
 
@@ -267,7 +283,7 @@ export class DemoAdapter implements DataAdapter {
       updatedAt: now,
     };
     s.enquiries.push(enquiry);
-    await this.commit();
+    await this.commit('enquiries');
     return { reference };
   }
 
@@ -305,7 +321,8 @@ export class DemoAdapter implements DataAdapter {
     }
     b.status = status;
     b.updatedAt = this.now();
-    await this.commit();
+    await this.commit('bookings');
+    if (b.scheduledTripId) this.listeners.forEach((l) => l('scheduled_trips'));
     return this.clone(b);
   }
 
@@ -315,7 +332,7 @@ export class DemoAdapter implements DataAdapter {
     if (!b) throw new DataError('Booking not found', 'not_found');
     b.internalNotes.push({ id: uuid(), body, author, createdAt: this.now() });
     b.updatedAt = this.now();
-    await this.commit();
+    await this.commit('bookings');
     return this.clone(b);
   }
 
@@ -330,11 +347,12 @@ export class DemoAdapter implements DataAdapter {
     if (!e) throw new DataError('Enquiry not found', 'not_found');
     e.status = status;
     e.updatedAt = this.now();
-    await this.commit();
+    await this.commit('enquiries');
     return this.clone(e);
   }
 
   private async upsert<T extends { id: string; createdAt: string; updatedAt: string }>(
+    table: SyncTable,
     list: (s: DataSnapshot) => T[],
     input: object,
     id: string | undefined,
@@ -348,16 +366,16 @@ export class DemoAdapter implements DataAdapter {
       if (idx < 0) throw new DataError('Record not found', 'not_found');
       const updated = { ...arr[idx]!, ...input, id, updatedAt: now } as T;
       arr[idx] = updated;
-      await this.commit();
+      await this.commit(table);
       return this.clone(updated);
     }
     const created = { ...defaults, ...input, id: uuid(), createdAt: now, updatedAt: now } as T;
     arr.push(created);
-    await this.commit();
+    await this.commit(table);
     return this.clone(created);
   }
 
-  private async remove(list: (s: DataSnapshot) => { id: string }[], id: string, guard?: (s: DataSnapshot) => string | null) {
+  private async remove(table: SyncTable, list: (s: DataSnapshot) => { id: string }[], id: string, guard?: (s: DataSnapshot) => string | null) {
     const s = await this.db();
     const reason = guard?.(s);
     if (reason) throw new DataError(reason, 'conflict');
@@ -365,7 +383,7 @@ export class DemoAdapter implements DataAdapter {
     const idx = arr.findIndex((x) => x.id === id);
     if (idx < 0) throw new DataError('Record not found', 'not_found');
     arr.splice(idx, 1);
-    await this.commit();
+    await this.commit(table);
   }
 
   private assertSlugFree(items: { id: string; slug: string }[], slug: string, id?: string) {
@@ -375,37 +393,37 @@ export class DemoAdapter implements DataAdapter {
   async savePackage(input: PackageInput, id?: string) {
     const s = await this.db();
     this.assertSlugFree(s.packages, input.slug, id);
-    return this.upsert<TravelPackage>((x) => x.packages, input, id, { rating: 0, reviewCount: 0, bookingCount: 0 });
+    return this.upsert<TravelPackage>('packages', (x) => x.packages, input, id, { rating: 0, reviewCount: 0, bookingCount: 0 });
   }
   deletePackage(id: string) {
-    return this.remove((s) => s.packages, id, (s) =>
+    return this.remove('packages', (s) => s.packages, id, (s) =>
       s.bookings.some((b) => b.packageId === id) ? 'This package has bookings. Archive it instead of deleting.' : null,
     );
   }
   saveTrip(input: ScheduledTripInput, id?: string) {
     if (input.seatsBooked > input.totalSeats) return Promise.reject(new DataError('Booked seats cannot exceed total seats.', 'validation'));
-    return this.upsert<ScheduledTrip>((s) => s.trips, input, id);
+    return this.upsert<ScheduledTrip>('scheduled_trips', (s) => s.trips, input, id);
   }
   deleteTrip(id: string) {
-    return this.remove((s) => s.trips, id, (s) =>
+    return this.remove('scheduled_trips', (s) => s.trips, id, (s) =>
       s.bookings.some((b) => b.scheduledTripId === id) ? 'This departure has bookings. Cancel it instead of deleting.' : null,
     );
   }
   saveVehicle(input: VehicleInput, id?: string) {
-    return this.upsert<Vehicle>((s) => s.vehicles, input, id, { rating: 0, reviewCount: 0 });
+    return this.upsert<Vehicle>('vehicles', (s) => s.vehicles, input, id, { rating: 0, reviewCount: 0 });
   }
   deleteVehicle(id: string) {
-    return this.remove((s) => s.vehicles, id, (s) =>
+    return this.remove('vehicles', (s) => s.vehicles, id, (s) =>
       s.trips.some((t) => t.vehicleId === id) ? 'This vehicle is assigned to scheduled trips. Reassign them first.' : null,
     );
   }
   async saveOperator(input: OperatorInput, id?: string) {
     const s = await this.db();
     this.assertSlugFree(s.operators, input.slug, id);
-    return this.upsert<Operator>((x) => x.operators, input, id, { rating: 0, reviewCount: 0 });
+    return this.upsert<Operator>('operators', (x) => x.operators, input, id, { rating: 0, reviewCount: 0 });
   }
   deleteOperator(id: string) {
-    return this.remove((s) => s.operators, id, (s) =>
+    return this.remove('operators', (s) => s.operators, id, (s) =>
       s.packages.some((p) => p.operatorId === id) || s.vehicles.some((v) => v.operatorId === id)
         ? 'This operator still has packages or vehicles. Reassign or remove them first.'
         : null,
@@ -414,20 +432,50 @@ export class DemoAdapter implements DataAdapter {
   async saveDestination(input: DestinationInput, id?: string) {
     const s = await this.db();
     this.assertSlugFree(s.destinations, input.slug, id);
-    return this.upsert<Destination>((x) => x.destinations, input, id);
+    return this.upsert<Destination>('destinations', (x) => x.destinations, input, id);
   }
   deleteDestination(id: string) {
-    return this.remove((s) => s.destinations, id, (s) =>
+    return this.remove('destinations', (s) => s.destinations, id, (s) =>
       s.packages.some((p) => p.destinationId === id) ? 'Packages use this destination. Deactivate it instead.' : null,
     );
   }
+  async updateBooking(id: string, patch: BookingUpdate) {
+    const s = await this.db();
+    const b = s.bookings.find((x) => x.id === id);
+    if (!b) throw new DataError('Booking not found', 'not_found');
+    Object.assign(b, patch, { updatedAt: this.now() });
+    await this.commit('bookings');
+    return this.clone(b);
+  }
+
+  deleteBooking(id: string) {
+    return this.remove('bookings', (s) => s.bookings, id, (s) =>
+      s.payments.some((p) => p.bookingId === id && p.status === 'paid') ? 'This booking has recorded payments. Cancel it instead of deleting.' : null,
+    );
+  }
+
+  async listPayments(bookingId?: string) {
+    const s = await this.db();
+    return this.clone(s.payments.filter((p) => !bookingId || p.bookingId === bookingId).sort((a, b) => b.createdAt.localeCompare(a.createdAt)));
+  }
+
+  async savePayment(input: PaymentInput, id?: string) {
+    const s = await this.db();
+    if (!s.bookings.some((b) => b.id === input.bookingId)) throw new DataError('Booking not found for this payment.', 'validation');
+    return this.upsert<PaymentRecord>('payment_records', (x) => x.payments, { ...input, currency: 'INR' }, id);
+  }
+
+  deletePayment(id: string) {
+    return this.remove('payment_records', (s) => s.payments, id);
+  }
+
   async updateReviewStatus(id: string, status: ReviewStatus) {
     const s = await this.db();
     const r = s.reviews.find((x) => x.id === id);
     if (!r) throw new DataError('Review not found', 'not_found');
     r.status = status;
     r.updatedAt = this.now();
-    await this.commit();
+    await this.commit('reviews');
     return this.clone(r);
   }
 

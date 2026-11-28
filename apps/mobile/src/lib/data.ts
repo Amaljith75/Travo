@@ -1,19 +1,21 @@
 import 'react-native-url-polyfill/auto';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createClient } from '@supabase/supabase-js';
-import { DemoAdapter, SupabaseAdapter, type DataAdapter, type KeyValueStore } from '@travo/core';
+import { DemoAdapter, SupabaseAdapter, TRAVO_SUPABASE, type DataAdapter, type KeyValueStore } from '@travo/core';
 
 /**
  * Chooses the data source at start-up.
  *
- * - With EXPO_PUBLIC_SUPABASE_URL + EXPO_PUBLIC_SUPABASE_ANON_KEY set, the app
- *   talks to Supabase using the public anon key (RLS protects all data).
- * - Otherwise it runs in demo mode: real, persistent storage on this device.
+ * - By default the app talks to the Travo Supabase project with the public
+ *   publishable key (RLS protects all data). Admin dashboard changes reach the
+ *   app live through Supabase Realtime.
+ * - EXPO_PUBLIC_DATA_MODE=demo runs on persistent sample data on the device.
  *
  * Never put a service-role key in the app.
  */
-const url = process.env.EXPO_PUBLIC_SUPABASE_URL;
-const anonKey = process.env.EXPO_PUBLIC_SUPABASE_ANON_KEY;
+const demoForced = process.env.EXPO_PUBLIC_DATA_MODE === 'demo';
+const url = demoForced ? undefined : process.env.EXPO_PUBLIC_SUPABASE_URL || TRAVO_SUPABASE.url;
+const anonKey = demoForced ? undefined : process.env.EXPO_PUBLIC_SUPABASE_ANON_KEY || TRAVO_SUPABASE.publishableKey;
 
 const asyncStore: KeyValueStore = {
   getItem: (k) => AsyncStorage.getItem(k),
