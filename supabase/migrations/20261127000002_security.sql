@@ -121,7 +121,7 @@ create policy "notifications staff write" on public.notifications for insert wit
 -- Traveller RPCs (no login required)
 -- ---------------------------------------------------------------------------
 create or replace function public.generate_reference(prefix text) returns text
-language plpgsql as $$
+language plpgsql set search_path = public as $$
 declare
   alphabet constant text := 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
   body text := '';
@@ -297,6 +297,7 @@ end $$;
 
 revoke all on function public.admin_set_booking_status(uuid, public.booking_status) from public, anon;
 grant execute on function public.admin_set_booking_status(uuid, public.booking_status) to authenticated;
+revoke execute on function public.handle_new_user() from public, anon, authenticated;
 grant execute on function public.create_booking_request(jsonb) to anon, authenticated;
 grant execute on function public.lookup_booking(text, text) to anon, authenticated;
 grant execute on function public.create_enquiry(jsonb) to anon, authenticated;

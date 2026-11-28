@@ -1,5 +1,5 @@
 import type { District, PackageCategory, TravelPackage, TripType, VehicleCategory } from '../../types';
-import { photo, type PhotoKey } from '../../utils/media';
+import { placePhotos, type PlaceKey } from '../../utils/media';
 import { addDays, todayISO } from '../../utils/format';
 import { childId, DEMO_TIMESTAMP, pkgId } from './ids';
 import { DEST } from './destinations';
@@ -29,7 +29,6 @@ interface Seed {
   inclusions: string[];
   exclusions: string[];
   cancellation?: string;
-  photos: PhotoKey[];
   itinerary: [title: string, description: string, meals?: string[], stay?: string][];
   featured?: boolean;
   trending?: boolean;
@@ -57,7 +56,6 @@ const seeds: Seed[] = [
     pickup: ['Kochi city', 'Kochi airport', 'Thrissur town'], pickupDistricts: ['Ernakulam', 'Thrissur'],
     inclusions: ['Private AC vehicle with driver', 'Fuel, tolls and parking', 'Kerala sadya lunch', 'Bottled water'],
     exclusions: ['Waterfall entry tickets (₹50)', 'Personal expenses'], cancellation: DAY_TRIP_CANCELLATION,
-    photos: ['waterfall', 'forest', 'mistyHills'],
     itinerary: [['Waterfalls and rainforest', 'Pickup 7:00 am · Athirappilly falls by 9:30 · Vazhachal · Sholayar drive · Lunch · Drop by 6:30 pm.', ['Lunch']]],
     featured: true, trending: true, rating: 4.8, reviews: 96, bookings: 412, createdDaysAgo: 120,
   },
@@ -72,7 +70,6 @@ const seeds: Seed[] = [
     pickup: ['Kochi — Vyttila Hub', 'Aluva metro station'], drop: ['Kochi — Vyttila Hub'], pickupDistricts: ['Ernakulam'],
     inclusions: ['AC Tempo Traveller', '2 nights resort stay', 'Breakfast and dinner', 'Trip captain', 'Campfire night'],
     exclusions: ['Lunches', 'Entry tickets', 'Jeep safari (optional)'],
-    photos: ['teaHills', 'teaRows', 'mistyHills', 'waterfall'],
     itinerary: [
       ['Kochi to Munnar', 'Depart 6:00 am, breakfast en route, Cheeyappara falls, spice garden, check-in and campfire.', ['Breakfast', 'Dinner'], 'Valley-view resort'],
       ['Eravikulam & Mattupetty', 'Nilgiri tahr at Eravikulam, Tea Museum, Mattupetty dam boating, Echo Point.', ['Breakfast', 'Dinner'], 'Valley-view resort'],
@@ -91,7 +88,6 @@ const seeds: Seed[] = [
     pickup: ['Alappuzha Finishing Point jetty', 'Kochi (with transfer add-on)'], pickupDistricts: ['Alappuzha', 'Ernakulam'],
     inclusions: ['Private houseboat for 22 hours', 'Lunch, evening snacks, dinner, breakfast', 'AC in bedrooms (9 pm – 6 am)', 'Welcome drink'],
     exclusions: ['Transfers to the jetty', 'Alcohol', 'Shikara ride'],
-    photos: ['houseboat', 'backwaters', 'canoe'],
     itinerary: [
       ['Board and cruise', 'Check-in 12:00 pm, cruise through Vembanad and Kuttanad canals, village walk, sunset anchor.', ['Lunch', 'Snacks', 'Dinner'], 'Premium houseboat'],
       ['Morning on the lake', 'Breakfast on deck, checkout 9:00 am.', ['Breakfast']],
@@ -109,7 +105,6 @@ const seeds: Seed[] = [
     pickup: ['Kozhikode railway station', 'Calicut airport'], pickupDistricts: ['Kozhikode', 'Malappuram'],
     inclusions: ['Transport', '2 nights stay', 'All meals', 'Trek guide & forest permits', 'Muthanga safari'],
     exclusions: ['Personal gear', 'Camera fees'],
-    photos: ['forest', 'mistyHills', 'wildlife'],
     itinerary: [
       ['Into the hills', 'Thamarassery ghat drive, Pookode lake kayaking, camp check-in and barbecue.', ['Lunch', 'Dinner'], 'Tented camp'],
       ['Chembra Peak trek', 'Guided trek to the heart lake (permits included), evening at Banasura dam.', ['Breakfast', 'Lunch', 'Dinner'], 'Plantation homestay'],
@@ -128,7 +123,6 @@ const seeds: Seed[] = [
     pickup: ['Kochi airport', 'Ernakulam railway station'], drop: ['Kochi airport'], pickupDistricts: ['Ernakulam'],
     inclusions: ['Private Innova Crysta', '4 nights stay', 'Daily breakfast', 'Houseboat full board', 'Driver allowance and tolls'],
     exclusions: ['Flights/trains', 'Entry tickets', 'Lunches and dinners except houseboat'],
-    photos: ['teaHills', 'houseboat', 'fortKochi', 'spices'],
     itinerary: [
       ['Arrive Kochi', 'Fort Kochi heritage walk, Chinese fishing nets at sunset, Kathakali show.', [], 'Kochi'],
       ['Kochi to Munnar', 'Scenic drive with waterfall stops, spice garden, evening at leisure.', ['Breakfast'], 'Munnar'],
@@ -149,7 +143,6 @@ const seeds: Seed[] = [
     pickup: ['Kochi — Vyttila Hub', 'Kottayam KSRTC'], pickupDistricts: ['Ernakulam', 'Kottayam'],
     inclusions: ['Transport', 'Tent stay', 'Dinner, barbecue & breakfast', 'Campfire', 'Trip captain'],
     exclusions: ['Paragliding (₹3,500)', 'Lunch'],
-    photos: ['meadow', 'mistyHills'],
     itinerary: [
       ['Up to the meadows', 'Depart 7:00 am, Thangalpara, Vagamon meadows, camp games, barbecue night.', ['Dinner'], 'Meadow campsite'],
       ['Pine forest & return', 'Sunrise walk, pine forest, optional paragliding, return by 6:00 pm.', ['Breakfast']],
@@ -167,7 +160,6 @@ const seeds: Seed[] = [
     pickup: ['Thiruvananthapuram Thampanoor', 'Kollam', 'Kottayam'], pickupDistricts: ['Thiruvananthapuram', 'Kollam', 'Kottayam'],
     inclusions: ['Return transport', 'Virtual Queue booking help', 'Driver bata and tolls', 'Coordinator'],
     exclusions: ['Food', 'Offerings', 'Accommodation upgrades'],
-    photos: ['temple', 'forest'],
     itinerary: [
       ['Departure to Erumely and Pamba', 'Evening departure, Erumely Petta Thullal stop, reach Nilakkal / Pamba.'],
       ['Darshan and return', 'Climb to Sannidhanam, darshan, return journey.'],
@@ -185,7 +177,6 @@ const seeds: Seed[] = [
     pickup: ['Thiruvananthapuram airport', 'Varkala Sivagiri station'], pickupDistricts: ['Thiruvananthapuram', 'Kollam'],
     inclusions: ['Transfers', '2 nights stay', 'Breakfast', 'Surf lesson', 'Ayurvedic massage'],
     exclusions: ['Lunch and dinner', 'Kayak rental'],
-    photos: ['beachCliff', 'palmBeach', 'lighthouse'],
     itinerary: [
       ['Arrive Varkala', 'Transfer, check-in, sunset on North Cliff.', [], 'Cliff-top resort'],
       ['Surf & spa', 'Morning surf lesson, afternoon Ayurveda, Kappil sunset.', ['Breakfast'], 'Cliff-top resort'],
@@ -204,7 +195,6 @@ const seeds: Seed[] = [
     pickup: ['Kochi airport'], drop: ['Thiruvananthapuram airport'], pickupDistricts: ['Ernakulam'],
     inclusions: ['All transfers', '6 nights stay', 'Breakfast daily', 'Candle-light dinner', 'Houseboat full board', 'Honeymoon decorations'],
     exclusions: ['Flights', 'Entry tickets', 'Personal expenses'],
-    photos: ['teaHills', 'houseboat', 'lighthouse', 'backwaters'],
     itinerary: [
       ['Kochi to Munnar', 'Airport pickup and scenic drive to the hills.', [], 'Munnar'],
       ['Munnar', 'Tea gardens, Eravikulam, candle-light dinner.', ['Breakfast', 'Dinner'], 'Munnar'],
@@ -227,7 +217,6 @@ const seeds: Seed[] = [
     pickup: ['Kochi', 'Kottayam'], pickupDistricts: ['Ernakulam', 'Kottayam'],
     inclusions: ['Private SUV', '1 night stay', 'Breakfast & dinner', 'Spice plantation tour'],
     exclusions: ['Boat safari tickets', 'Lunch'],
-    photos: ['wildlife', 'spices', 'forest'],
     itinerary: [
       ['Drive to Thekkady', 'Spice plantation walk, Kalaripayattu show.', ['Dinner'], 'Jungle resort'],
       ['Periyar safari', 'Morning lake safari, return drive.', ['Breakfast']],
@@ -245,7 +234,6 @@ const seeds: Seed[] = [
     pickup: ['Fort Kochi — Vasco da Gama Square', 'Ernakulam boat jetty'], pickupDistricts: ['Ernakulam'],
     inclusions: ['Licensed guide', 'Food tasting (5 stops)', 'Ferry ticket'],
     exclusions: ['Entry tickets', 'Shopping'], cancellation: DAY_TRIP_CANCELLATION,
-    photos: ['fortKochi', 'spices'],
     itinerary: [['Heritage & flavours', '9:00 am start, fishing nets, churches, Mattancherry, Jew Town, café lunch, end 3:00 pm.', ['Tasting lunch']]],
     rating: 4.7, reviews: 133, bookings: 720, createdDaysAgo: 10,
   },
@@ -260,7 +248,6 @@ const seeds: Seed[] = [
     pickup: ['Thiruvananthapuram city', 'Thiruvananthapuram airport'], pickupDistricts: ['Thiruvananthapuram'],
     inclusions: ['Private vehicle', 'Fuel and tolls', 'Driver bata'],
     exclusions: ['Food', 'Entry tickets'], cancellation: DAY_TRIP_CANCELLATION,
-    photos: ['mistyHills', 'lighthouse'],
     itinerary: [['Hills to beach', '7:00 am pickup, Ponmudi by 9:30, Golden Valley, lunch, Kovalam for sunset, drop by 8:00 pm.']],
     rating: 4.4, reviews: 40, bookings: 230, createdDaysAgo: 5,
   },
@@ -275,7 +262,6 @@ const seeds: Seed[] = [
     pickup: ['Kannur airport', 'Kozhikode railway station'], pickupDistricts: ['Kannur', 'Kozhikode', 'Kasaragod'],
     inclusions: ['Private SUV', '3 nights stay', 'Breakfast & dinner', 'Theyyam guide', 'Kayak session'],
     exclusions: ['Lunch', 'Entry tickets'],
-    photos: ['beachCliff', 'palmBeach', 'backwaters'],
     itinerary: [
       ['Arrive Kannur', 'Pickup, St. Angelo Fort, Payyambalam beach.', ['Dinner'], 'Heritage homestay'],
       ['Theyyam night', 'Handloom village, night Theyyam with guide.', ['Breakfast', 'Dinner'], 'Heritage homestay'],
@@ -295,7 +281,6 @@ const seeds: Seed[] = [
     pickup: ['Kochi airport'], pickupDistricts: ['Ernakulam'],
     inclusions: ['Premium transfers', '2 nights villa', 'All meals', 'Sunset cruise', 'Spa session'],
     exclusions: ['Alcohol', 'Additional spa treatments'],
-    photos: ['backwaters', 'canoe', 'houseboat'],
     itinerary: [
       ['Arrive', 'Airport pickup, villa check-in, lakeside dinner.', ['Lunch', 'Dinner'], 'Lakefront villa'],
       ['Birds & sunset', 'Bird sanctuary walk, spa, sunset cruise to Pathiramanal.', ['Breakfast', 'Lunch', 'Dinner'], 'Lakefront villa'],
@@ -314,7 +299,6 @@ const seeds: Seed[] = [
     pickup: ['Munroe Island jetty', 'Kollam KSRTC (add-on)'], pickupDistricts: ['Kollam'],
     inclusions: ['Country canoe with boatman', 'Village breakfast', 'Coir-making demo'],
     exclusions: ['Transport to Munroe Island'], cancellation: DAY_TRIP_CANCELLATION,
-    photos: ['canoe', 'backwaters'],
     itinerary: [['Sunrise canals', '6:30 am canoe, mangrove canals, breakfast, coir village, end 10:30 am.', ['Breakfast']]],
     rating: 4.6, reviews: 58, bookings: 260, createdDaysAgo: 2,
   },
@@ -329,7 +313,6 @@ const seeds: Seed[] = [
     pickup: ['Kochi airport', 'Ernakulam Junction'], drop: ['Thiruvananthapuram airport'], pickupDistricts: ['Ernakulam'],
     inclusions: ['Luxury coach', '5 nights stay', 'Breakfast & dinner', 'Tour manager', 'Shared houseboat cruise'],
     exclusions: ['Lunch', 'Entry tickets', 'Flights'],
-    photos: ['teaHills', 'houseboat', 'lighthouse'],
     itinerary: [
       ['Kochi', 'Arrival and Fort Kochi tour.', ['Dinner'], 'Kochi'],
       ['Munnar', 'Drive to Munnar with stops.', ['Breakfast', 'Dinner'], 'Munnar'],
@@ -374,7 +357,9 @@ export const seedPackages: TravelPackage[] = seeds.map((s, i) => {
     inclusions: s.inclusions,
     exclusions: s.exclusions,
     cancellationPolicy: s.cancellation ?? STANDARD_CANCELLATION,
-    images: s.photos.map((p, j) => ({ id: childId('5', n, j + 1), url: photo(p), caption: null, sortOrder: j })),
+    images: [...new Set([...placePhotos(s.destination as PlaceKey), ...(s.also ?? []).map((d) => placePhotos(d as PlaceKey)[0]!)])]
+      .slice(0, 6)
+      .map((url, j) => ({ id: childId('5', n, j + 1), url, caption: null, sortOrder: j })),
     itinerary: s.itinerary.map(([title, description, meals, stay], j) => ({
       id: childId('6', n, j + 1),
       dayNumber: j + 1,
