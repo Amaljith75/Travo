@@ -43,8 +43,11 @@ jobs:
         with:
           path: apps/admin/out
 
+  # Branch builds only verify the dashboard compiles; GitHub's github-pages
+  # environment accepts deployments from the default branch.
   deploy:
     needs: build
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     environment:
       name: github-pages
