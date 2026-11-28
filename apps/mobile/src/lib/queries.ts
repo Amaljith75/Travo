@@ -1,6 +1,19 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import type { CreateBookingInput, CreateEnquiryInput, PackageFilters, TripFilters, VehicleFilters } from '@travo/core';
+import type { CreateBookingInput, CreateEnquiryInput, PackageFilters, SyncTable, TripFilters, VehicleFilters } from '@travo/core';
 import { api } from './data';
+
+/** Query groups to refresh when a table changes (live sync from the admin). */
+export const TABLE_QUERY_KEYS: Record<SyncTable, string[]> = {
+  destinations: ['destinations', 'destination', 'packages'],
+  operators: ['operators', 'operator'],
+  packages: ['packages', 'package', 'destinations'],
+  scheduled_trips: ['trips', 'trip'],
+  vehicles: ['vehicles', 'vehicle'],
+  bookings: ['booking', 'trips', 'trip'],
+  enquiries: [],
+  reviews: ['reviews'],
+  payment_records: ['booking'],
+};
 
 export const keys = {
   destinations: (featured?: boolean) => ['destinations', { featured }] as const,

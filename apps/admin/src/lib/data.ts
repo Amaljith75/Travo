@@ -1,10 +1,11 @@
 'use client';
 
 import { createClient, type SupabaseClient } from '@supabase/supabase-js';
-import { DemoAdapter, SupabaseAdapter, type DataAdapter, type KeyValueStore } from '@travo/core';
+import { DemoAdapter, SupabaseAdapter, TRAVO_SUPABASE, type DataAdapter, type KeyValueStore } from '@travo/core';
 
-const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
-const anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+const demoForced = process.env.NEXT_PUBLIC_DATA_MODE === 'demo';
+const url = demoForced ? undefined : process.env.NEXT_PUBLIC_SUPABASE_URL || TRAVO_SUPABASE.url;
+const anonKey = demoForced ? undefined : process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || TRAVO_SUPABASE.publishableKey;
 
 /** Browser Supabase client (anon key + the signed-in admin's session). */
 export const supabase: SupabaseClient | null = url && anonKey ? createClient(url, anonKey, { auth: { persistSession: true, autoRefreshToken: true } }) : null;

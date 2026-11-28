@@ -11,3 +11,4 @@ export * from './services/supabase-adapter';
 export * from './services/payments';
 export * from './services/auth';
 export { createSeedSnapshot, type DataSnapshot } from './data/seed';
+export * from './config';
